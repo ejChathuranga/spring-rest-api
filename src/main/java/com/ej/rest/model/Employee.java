@@ -2,10 +2,13 @@ package com.ej.rest.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class Employee {
     private final UUID id;
+
+    @NotBlank
     private final String name;
 
     public Employee(@JsonProperty("id") UUID id, @JsonProperty("name") String name) {

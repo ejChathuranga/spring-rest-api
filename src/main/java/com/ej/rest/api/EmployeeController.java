@@ -3,8 +3,11 @@ package com.ej.rest.api;
 import com.ej.rest.model.Employee;
 import com.ej.rest.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,7 +23,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public void addEmployee(@RequestBody Employee employee) {
+    public void addEmployee(@Valid @NonNull @RequestBody Employee employee) {
         employeeService.addEmployee(employee);
     }
 
@@ -41,7 +44,7 @@ public class EmployeeController {
     }
 
     @PutMapping(path = "{id}")
-    public int updateEmp(@PathVariable("id") UUID id, @RequestBody Employee employee) {
+    public int updateEmp(@PathVariable("id") UUID id,@Valid @NonNull  @RequestBody Employee employee) {
         return employeeService.updateEmpByID(id, employee);
     }
 }
