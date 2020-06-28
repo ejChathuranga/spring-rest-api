@@ -1,4 +1,4 @@
-package com.ej.rest.dao;
+package com.ej.rest.repo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

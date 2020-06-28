@@ -1,15 +1,12 @@
 package com.ej.rest.api;
 
 import com.ej.rest.model.Emp;
-import com.ej.rest.service.EService;
-import org.hibernate.annotations.CreationTimestamp;
+import com.ej.rest.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
-import sun.net.httpserver.HttpServerImpl;
-import sun.rmi.runtime.Log;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,11 +15,11 @@ import java.util.Optional;
 @RequestMapping("api/v2/employee")
 @RestController
 public class EmpController {
-    private final EService employeeRepository;
+    private final EmpService employeeRepository;
 
     @Autowired
-    public EmpController(EService eService) {
-        this.employeeRepository = eService;
+    public EmpController(EmpService empService) {
+        this.employeeRepository = empService;
     }
 
     @PostMapping

@@ -1,6 +1,6 @@
 package com.ej.rest.service;
 
-import com.ej.rest.dao.EmpJDBCRepository;
+import com.ej.rest.repo.EmpJDBCRepository;
 import com.ej.rest.model.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class EService {
+public class EmpService {
 
     @Autowired
     EmpJDBCRepository repository;
