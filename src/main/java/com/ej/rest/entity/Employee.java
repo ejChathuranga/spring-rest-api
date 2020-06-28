@@ -10,25 +10,25 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "_id")
     private long id;
 
+    @Column(name = "_first_name")
     private String firstName;
+    @Column(name = "_last_name")
     private String lastName;
+    @Column(name = "_email_id")
     private String emailId;
+    @Column(name = "_salary")
     private String salary;
+    @Column(name = "_address")
     private String address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dep_id", referencedColumnName = "id")
-    private Department department;
+    @Column(name = "_department_id")
+    private long  departmentId;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "roll_id", referencedColumnName = "id")
-    private EmpRoll empRoll;
-
-    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
-    private Family family;
+    @Column(name = "_roll_id")
+    private long rollId;
 
     public Employee() {
     }
@@ -81,21 +81,6 @@ public class Employee {
         this.address = address;
     }
 
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public EmpRoll getEmpRoll() {
-        return empRoll;
-    }
-
-    public void setEmpRoll(EmpRoll empRoll) {
-        this.empRoll = empRoll;
-    }
 
     @Override
     public String toString() {
@@ -106,8 +91,6 @@ public class Employee {
                 ", emailId='" + emailId + '\'' +
                 ", salary='" + salary + '\'' +
                 ", address='" + address + '\'' +
-                ", department=" + department +
-                ", empRoll=" + empRoll +
                 '}';
     }
 }

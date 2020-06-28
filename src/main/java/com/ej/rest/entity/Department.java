@@ -9,9 +9,13 @@ public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "_id")
     private long id;
+
+    @Column(name = "_name")
     private String name;
+
+    @Column(name = "_desc")
     private String desc;
 
     public Department() {

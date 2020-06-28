@@ -1,6 +1,8 @@
 package com.ej.rest.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "emp_roll")
@@ -10,15 +12,19 @@ public class EmpRoll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "_id")
     private long id;
 
-    @OneToOne(mappedBy = "emp_roll")
-    private Employee employee;
-
+    @NotNull
+    @Size(max = 65)
+    @Column(name = "_name")
     private String name;
+
+    @Column(name = "_desc")
     private String desc;
+    @Column(name = "_min_salary")
     private String minSalary;
+    @Column(name = "_max_salary")
     private String maxSalary;
 
     public EmpRoll() {
