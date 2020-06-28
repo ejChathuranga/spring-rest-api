@@ -1,7 +1,6 @@
 package com.ej.rest;
 
-import com.ej.rest.dao.EmployeeJDBCRepository;
-import com.ej.rest.model.Emp;
+import com.ej.rest.dao.EmpJDBCRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class RestApplication implements CommandLineRunner {
 	private Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private EmployeeJDBCRepository employeeRepository;
+	private EmpJDBCRepository employeeRepository;
 
 
 	public static void main(String[] args) {

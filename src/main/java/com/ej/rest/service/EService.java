@@ -1,6 +1,6 @@
 package com.ej.rest.service;
 
-import com.ej.rest.dao.EmployeeJDBCRepository;
+import com.ej.rest.dao.EmpJDBCRepository;
 import com.ej.rest.model.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class EService {
 
     @Autowired
-    EmployeeJDBCRepository repository;
+    EmpJDBCRepository repository;
 
 
     public List<Emp> findAll() {
@@ -34,7 +34,7 @@ public class EService {
         return repository.insert(emp);
     }
 
-    public int update(Emp emp) {
-        return repository.update(emp);
+    public int update(Long id, Emp emp) {
+        return repository.update(id, emp);
     }
 }
