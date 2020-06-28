@@ -1,6 +1,6 @@
 package com.ej.rest.api;
 
-import com.ej.rest.model.Emp;
+import com.ej.rest.model.Employee;
 import com.ej.rest.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,14 +23,14 @@ public class EmpController {
     }
 
     @PostMapping
-    public int add(@Valid @NonNull @RequestBody Emp emp) {
-        return employeeRepository.insert(emp);
+    public int add(@Valid @NonNull @RequestBody Employee employee) {
+        return employeeRepository.insert(employee);
     }
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<Emp> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<Employee> findById(@PathVariable("id") Long id) {
         try {
-            Optional<Emp> emp = employeeRepository.findById(id);
+            Optional<Employee> emp = employeeRepository.findById(id);
             return emp
                     .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -40,12 +40,12 @@ public class EmpController {
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Emp> update(@PathVariable("id") Long id, @Valid @NonNull @RequestBody Emp emp) {
-        ResponseEntity<Emp> entity = findById(id);
+    public ResponseEntity<Employee> update(@PathVariable("id") Long id, @Valid @NonNull @RequestBody Employee employee) {
+        ResponseEntity<Employee> entity = findById(id);
         if (entity.getStatusCode().equals(HttpStatus.OK)) {
-            employeeRepository.update(id, emp);
-            emp.setId(id);
-            return new ResponseEntity<>(emp, HttpStatus.OK);
+            employeeRepository.update(id, employee);
+            employee.setId(id);
+            return new ResponseEntity<>(employee, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -62,7 +62,7 @@ public class EmpController {
     }
 
     @GetMapping
-    public List<Emp> findAll() {
+    public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
 

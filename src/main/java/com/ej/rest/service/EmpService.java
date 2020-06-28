@@ -1,7 +1,7 @@
 package com.ej.rest.service;
 
 import com.ej.rest.repo.EmpJDBCRepository;
-import com.ej.rest.model.Emp;
+import com.ej.rest.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +18,11 @@ public class EmpService {
     EmpJDBCRepository repository;
 
 
-    public List<Emp> findAll() {
+    public List<Employee> findAll() {
         return repository.findAll();
     }
 
-    public Optional<Emp> findById(Long id) {
+    public Optional<Employee> findById(Long id) {
         return repository.findById(id);
     }
 
@@ -30,11 +30,11 @@ public class EmpService {
         return repository.deleteById(id);
     }
 
-    public int insert(Emp emp) {
-        return repository.insert(emp);
+    public int insert(Employee employee) {
+        return repository.insert(employee);
     }
 
-    public int update(Long id, Emp emp) {
-        return repository.update(id, emp);
+    public int update(Long id, Employee employee) {
+        return repository.update(id, employee);
     }
 }
