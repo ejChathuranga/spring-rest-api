@@ -1,6 +1,7 @@
 package com.ej.rest.api;
 
 import com.ej.rest.model.Employee;
+import com.ej.rest.model.Response;
 import com.ej.rest.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,22 +16,22 @@ import java.util.Optional;
 @RequestMapping("api/v2/employee")
 @RestController
 public class EmpController {
-    private final EmpService employeeRepository;
+    private final EmpService service;
 
     @Autowired
     public EmpController(EmpService empService) {
-        this.employeeRepository = empService;
+        this.service = empService;
     }
 
     @PostMapping
-    public int add(@Valid @NonNull @RequestBody Employee employee) {
-        return employeeRepository.insert(employee);
+    public Response add(@Valid @NonNull @RequestBody Employee employee) {
+        return service.insert(employee);
     }
 
     @GetMapping(path = "{id}")
     public ResponseEntity<Employee> findById(@PathVariable("id") Long id) {
         try {
-            Optional<Employee> emp = employeeRepository.findById(id);
+            Optional<Employee> emp = service.findById(id);
             return emp
                     .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -43,7 +44,7 @@ public class EmpController {
     public ResponseEntity<Employee> update(@PathVariable("id") Long id, @Valid @NonNull @RequestBody Employee employee) {
         ResponseEntity<Employee> entity = findById(id);
         if (entity.getStatusCode().equals(HttpStatus.OK)) {
-            employeeRepository.update(id, employee);
+            service.update(id, employee);
             employee.setId(id);
             return new ResponseEntity<>(employee, HttpStatus.OK);
         }
@@ -54,7 +55,7 @@ public class EmpController {
     public ResponseEntity<?> deleteById(@PathVariable("id") Long id) {
         ResponseEntity<?> entity = findById(id);
         if (entity.getStatusCode().equals(HttpStatus.OK)) {
-            employeeRepository.deleteById(id);
+            service.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,7 +64,7 @@ public class EmpController {
 
     @GetMapping
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        return service.findAll();
     }
 
 }

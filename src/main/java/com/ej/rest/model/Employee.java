@@ -1,10 +1,9 @@
 package com.ej.rest.model;
 
-import com.ej.rest.entity.Department;
-import com.ej.rest.entity.EmpRoll;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class Employee {
 
@@ -20,30 +19,30 @@ public class Employee {
     private String salary;
     @NotBlank
     private String address;
-    @NotBlank
-    private Department department;
-    @NotBlank
-    private EmpRoll roll;
+    @NotNull
+    private long departmentId;
+    @NotNull
+    private long rollId;
 
     public Employee() {
     }
 
     public Employee(long id,
                     @JsonProperty("firstName") @NotBlank String firstName,
-                    @JsonProperty("Name") @NotBlank String lastName,
+                    @JsonProperty("lastName") @NotBlank String lastName,
                     @JsonProperty("emailId") @NotBlank String emailId,
                     @JsonProperty("salary") @NotBlank String salary,
                     @JsonProperty("address") @NotBlank String address,
-                    @JsonProperty("department") @NotBlank Department department,
-                    @JsonProperty("roll") @NotBlank EmpRoll roll) {
+                    @JsonProperty("departmentId") @NotBlank long departmentId,
+                    @JsonProperty("rollId") @NotBlank long rollId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.salary = salary;
         this.address = address;
-        this.department = department;
-        this.roll = roll;
+        this.departmentId = departmentId;
+        this.rollId = rollId;
     }
 
     public long getId() {
@@ -94,20 +93,20 @@ public class Employee {
         this.address = address;
     }
 
-    public Department getDepartment() {
-        return department;
+    public long getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartmentId(long departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public EmpRoll getRoll() {
-        return roll;
+    public long getRollId() {
+        return rollId;
     }
 
-    public void setRoll(EmpRoll roll) {
-        this.roll = roll;
+    public void setRollId(long rollId) {
+        this.rollId = rollId;
     }
 
     @Override
@@ -119,8 +118,8 @@ public class Employee {
                 ", emailId='" + emailId + '\'' +
                 ", salary='" + salary + '\'' +
                 ", address='" + address + '\'' +
-                ", department=" + department +
-                ", roll=" + roll +
+                ", departmentId=" + departmentId +
+                ", rollId=" + rollId +
                 '}';
     }
 }
