@@ -1,7 +1,5 @@
 package com.ej.rest.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +7,7 @@ public class Family {
 
     private long id;
     @NotBlank
-    private String firstName;
+    private String fullName;
     @NotBlank
     private String relation;
     @NotBlank
@@ -30,12 +28,12 @@ public class Family {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getRelation() {

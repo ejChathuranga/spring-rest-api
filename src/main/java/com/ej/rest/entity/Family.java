@@ -10,15 +10,16 @@ public class Family {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "_id")
     private long id;
 
-    @OneToOne
-    @MapsId
-    private Employee employee;
-
-    private String firstName;
+    @Column(name = "_employee_id")
+    private long employeeId;
+    @Column(name = "_fullName")
+    private String fullName;
+    @Column(name = "_relation")
     private String relation;
+    @Column(name = "_mobile")
     private String mobile;
 
     public Family() {
@@ -32,20 +33,20 @@ public class Family {
         this.id = id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getRelation() {
