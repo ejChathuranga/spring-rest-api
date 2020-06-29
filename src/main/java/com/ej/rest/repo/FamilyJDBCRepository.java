@@ -21,7 +21,7 @@ public class FamilyJDBCRepository {
         @Override
         public Family mapRow(ResultSet rs, int rowNum) throws SQLException {
             Family family = new Family();
-            
+
             family.setId(rs.getLong("_id"));
             family.setEmpId(rs.getLong("_employee_id"));
             family.setFullName(rs.getString("_fullName"));
@@ -36,9 +36,9 @@ public class FamilyJDBCRepository {
         return jdbcTemplate.query("select * from family", new FamilyRowMapper());
     }
 
-    public Optional<Family> findById(long id) {
-        return Optional.ofNullable(jdbcTemplate.queryForObject("select * from family where _id=?", new Object[]{
-                        id
+    public Optional<List<Family>> findMembersById(long empId) {
+        return Optional.of(jdbcTemplate.query("select * from family where _employee_id=?", new Object[]{
+                        empId
                 },
                 new FamilyRowMapper()));
     }
