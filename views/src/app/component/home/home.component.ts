@@ -1,4 +1,4 @@
-import { Name } from './../home';
+import { Name } from './../../home';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
