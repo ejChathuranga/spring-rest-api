@@ -9,8 +9,8 @@ export class EmployeeCreateService {
   constructor(private http: HttpClient) {}
 
   public addEmp(user: User) {
-    return this.http.post('http://localhost:8080/api/v2/employee', user, {
-      responseType: 'text' as 'json',
+    return this.http.post<any>('http://localhost:8080/api/v2/employee', user, {
+      responseType: 'json',
     });
   }
 }
