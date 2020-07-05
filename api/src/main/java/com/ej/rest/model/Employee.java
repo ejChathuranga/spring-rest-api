@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 
 public class Employee {
 
-
     private long id;
     @NotBlank
     private String firstName;
@@ -20,9 +19,9 @@ public class Employee {
     @NotBlank
     private String address;
     @NotNull
-    private long departmentId;
+    private String department;
     @NotNull
-    private long rollId;
+    private String roll;
 
     public Employee() {
     }
@@ -33,16 +32,16 @@ public class Employee {
                     @JsonProperty("emailId") @NotBlank String emailId,
                     @JsonProperty("salary") @NotBlank String salary,
                     @JsonProperty("address") @NotBlank String address,
-                    @JsonProperty("departmentId") @NotBlank long departmentId,
-                    @JsonProperty("rollId") @NotBlank long rollId) {
+                    @JsonProperty("departmentId") @NotBlank String department,
+                    @JsonProperty("rollId") @NotBlank String roll) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.salary = salary;
         this.address = address;
-        this.departmentId = departmentId;
-        this.rollId = rollId;
+        this.department = department;
+        this.roll = roll;
     }
 
     public long getId() {
@@ -93,20 +92,20 @@ public class Employee {
         this.address = address;
     }
 
-    public long getDepartmentId() {
-        return departmentId;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(long departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public long getRollId() {
-        return rollId;
+    public String getRoll() {
+        return roll;
     }
 
-    public void setRollId(long rollId) {
-        this.rollId = rollId;
+    public void setRoll(String roll) {
+        this.roll = roll;
     }
 
     @Override
@@ -118,8 +117,8 @@ public class Employee {
                 ", emailId='" + emailId + '\'' +
                 ", salary='" + salary + '\'' +
                 ", address='" + address + '\'' +
-                ", departmentId=" + departmentId +
-                ", rollId=" + rollId +
+                ", department='" + department + '\'' +
+                ", roll='" + roll + '\'' +
                 '}';
     }
 }

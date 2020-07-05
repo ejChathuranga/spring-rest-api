@@ -24,11 +24,11 @@ public class Employee {
     @Column(name = "_address")
     private String address;
 
-    @Column(name = "_department_id")
-    private long  departmentId;
+    @Column(name = "_department")
+    private String department;
 
-    @Column(name = "_roll_id")
-    private long rollId;
+    @Column(name = "_roll")
+    private String roll;
 
     public Employee() {
     }
@@ -81,20 +81,20 @@ public class Employee {
         this.address = address;
     }
 
-    public long getDepartmentId() {
-        return departmentId;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartmentId(long departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public long getRollId() {
-        return rollId;
+    public String getRoll() {
+        return roll;
     }
 
-    public void setRollId(long rollId) {
-        this.rollId = rollId;
+    public void setRoll(String roll) {
+        this.roll = roll;
     }
 
     @Override
@@ -106,8 +106,8 @@ public class Employee {
                 ", emailId='" + emailId + '\'' +
                 ", salary='" + salary + '\'' +
                 ", address='" + address + '\'' +
-                ", departmentId=" + departmentId +
-                ", rollId=" + rollId +
+                ", departmentId=" + department +
+                ", rollId=" + roll +
                 '}';
     }
 }

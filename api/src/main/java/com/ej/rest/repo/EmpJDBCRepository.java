@@ -27,8 +27,8 @@ public class EmpJDBCRepository {
             employee.setEmailId(rs.getString("_email_id"));
             employee.setSalary(rs.getString("_salary"));
             employee.setAddress(rs.getString("_address"));
-            employee.setDepartmentId(rs.getLong("_department_id"));
-            employee.setRollId(rs.getLong("_roll_id"));
+            employee.setDepartment(rs.getString("_department"));
+            employee.setRoll(rs.getString("_roll"));
 
             return employee;
         }
@@ -51,7 +51,7 @@ public class EmpJDBCRepository {
             return Optional.of(jdbcTemplate.query("select * from employee where _email_id=?", new Object[]{
                             email
                     },
-                    new BeanPropertyRowMapper<Employee>(Employee.class)));
+                    new EmpRowMapper()));
 
 
         } catch (Exception e) {
@@ -67,19 +67,19 @@ public class EmpJDBCRepository {
 
     public int insert(Employee emp) {
         return jdbcTemplate.update("insert into employee " +
-                        "(_id, _first_name, _last_name, _email_id, _salary, _address, _department_id, _roll_id) " +
+                        "(_id, _first_name, _last_name, _email_id, _salary, _address, _department, _roll) " +
                         "values(?, ?, ?, ?,?, ?, ?, ?)",
                 emp.getId(), emp.getFirstName(), emp.getLastName(), emp.getEmailId(),
-                emp.getSalary(), emp.getAddress(), emp.getDepartmentId(), emp.getRollId());
+                emp.getSalary(), emp.getAddress(), emp.getDepartment(), emp.getRoll());
     }
 
     public int update(Long id, Employee emp) {
         return jdbcTemplate.update(
                 "update employee " + " set _first_name = ?, _last_name = ?, _email_id = ?, " +
-                        " _salary = ?, _address = ?, _department_id = ?, _roll_id = ?" +
+                        " _salary = ?, _address = ?, _department = ?, _roll = ?" +
                         " where _id = ?",
                 emp.getFirstName(), emp.getLastName(), emp.getEmailId(), emp.getSalary(), emp.getAddress(),
-                emp.getDepartmentId(), emp.getRollId(),
+                emp.getDepartment(), emp.getRoll(),
                 id);
     }
 }

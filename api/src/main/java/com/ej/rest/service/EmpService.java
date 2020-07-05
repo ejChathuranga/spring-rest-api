@@ -50,13 +50,23 @@ public class EmpService {
     public Response<?> update(Long id, Employee employee) {
         Optional<List<Employee>> optionalEmployee = findByEmail(employee);
 
-        System.out.println("emp: "+employee.toString());
-        System.out.println("old emp: "+optionalEmployee.get().get(0).toString());
+        System.out.println("optionalEmployee.isPresent()  : "+optionalEmployee.isPresent() );
 
-        if (!optionalEmployee.get().get(0).getEmailId().equals(employee.getEmailId()) && repository.update(id, employee) > 0) {
+        for (Employee e: optionalEmployee.get()
+             ) {
+            System.out.println("--->>> loop" + e.toString());
+        }
+        if (optionalEmployee.get().size() == 0 && repository.update(id, employee) > 0){
             return new Response<>(HttpStatus.OK.value());
         }
 
-        return new Response<>(HttpStatus.BAD_REQUEST.value(), "email id is already registered", null );
+        if (optionalEmployee.get().size() >1){
+            return new Response<>(HttpStatus.BAD_REQUEST.value(), "You cannot change email", null );
+        }
+        if (optionalEmployee.get().get(0).getId() == (employee.getId()) && repository.update(id, employee) > 0) {
+            return new Response<>(HttpStatus.OK.value());
+        }
+
+        return new Response<>(HttpStatus.BAD_REQUEST.value(), "Email is already exist", null );
     }
 }
