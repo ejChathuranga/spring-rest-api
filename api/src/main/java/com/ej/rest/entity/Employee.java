@@ -81,6 +81,21 @@ public class Employee {
         this.address = address;
     }
 
+    public long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(long departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public long getRollId() {
+        return rollId;
+    }
+
+    public void setRollId(long rollId) {
+        this.rollId = rollId;
+    }
 
     @Override
     public String toString() {
@@ -91,6 +106,8 @@ public class Employee {
                 ", emailId='" + emailId + '\'' +
                 ", salary='" + salary + '\'' +
                 ", address='" + address + '\'' +
+                ", departmentId=" + departmentId +
+                ", rollId=" + rollId +
                 '}';
     }
 }

@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RequestMapping("api/v2/employee")
 @RestController
+@CrossOrigin(origins = "*")
 public class EmpController {
     private final EmpService service;
 

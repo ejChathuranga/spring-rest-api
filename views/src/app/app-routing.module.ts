@@ -1,3 +1,4 @@
+import { EmployeeUpdateComponent } from './component/employee-update/employee-update.component';
 import { EmployeeCreateComponent } from './component/employee-create/employee-create.component';
 import { EmployeeListComponent } from './component/employee-list/employee-list.component';
 import { HomeComponent } from './component/home/home.component';
@@ -9,6 +10,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'all', component: EmployeeListComponent },
   { path: 'add-employee', component: EmployeeCreateComponent },
+  { path: 'update-employee', component: EmployeeUpdateComponent },
 ];
 
 @NgModule({
