@@ -42,14 +42,9 @@ public class EmpController {
     }
 
     @PutMapping(path = "{id}")
-    public ResponseEntity<Employee> update(@PathVariable("id") Long id, @Valid @NonNull @RequestBody Employee employee) {
-        ResponseEntity<Employee> entity = findById(id);
-        if (entity.getStatusCode().equals(HttpStatus.OK)) {
-            service.update(id, employee);
-            employee.setId(id);
-            return new ResponseEntity<>(employee, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public Response update(@PathVariable("id") Long id, @Valid @NonNull @RequestBody Employee employee) {
+
+        return service.update(id, employee);
     }
 
     @DeleteMapping(path = "{id}")

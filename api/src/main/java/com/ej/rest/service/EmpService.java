@@ -47,7 +47,16 @@ public class EmpService {
         return new Response<>(HttpStatus.BAD_REQUEST.value(), "email id is already registered", null );
     }
 
-    public int update(Long id, Employee employee) {
-        return repository.update(id, employee);
+    public Response<?> update(Long id, Employee employee) {
+        Optional<List<Employee>> optionalEmployee = findByEmail(employee);
+
+        System.out.println("emp: "+employee.toString());
+        System.out.println("old emp: "+optionalEmployee.get().get(0).toString());
+
+        if (!optionalEmployee.get().get(0).getEmailId().equals(employee.getEmailId()) && repository.update(id, employee) > 0) {
+            return new Response<>(HttpStatus.OK.value());
+        }
+
+        return new Response<>(HttpStatus.BAD_REQUEST.value(), "email id is already registered", null );
     }
 }

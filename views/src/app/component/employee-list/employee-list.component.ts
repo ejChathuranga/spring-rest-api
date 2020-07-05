@@ -63,10 +63,18 @@ export class EmployeeListComponent implements OnInit {
     let res = this.employeeList.updateEmp(this.user.id, this.user);
     res.subscribe(
       (data) => {
-        this.modalService.dismissAll();
-        this.getAll();
+        console.log(data);
+        if (data.code != 200) {
+          this.isBad = true;
+          this.message = data.msg;
+        } else {
+          this.modalService.dismissAll();
+          this.getAll();
+        }
       },
       (err) => {
+        console.log(err);
+
         this.isBad = true;
         this.message = 'Employee updating failed! Please try again later';
       }

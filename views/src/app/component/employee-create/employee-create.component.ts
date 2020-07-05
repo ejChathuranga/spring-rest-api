@@ -24,6 +24,11 @@ export class EmployeeCreateComponent implements OnInit {
         this.message = data.msg;
       } else {
         this.isBad = false;
+        this.user.firstName = '';
+        this.user.lastName = '';
+        this.user.emailId = '';
+        this.user.salary = '';
+        this.user.address = '';
       }
     });
   }
