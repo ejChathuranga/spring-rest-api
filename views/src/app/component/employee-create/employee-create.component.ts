@@ -30,6 +30,16 @@ export class EmployeeCreateComponent implements OnInit {
   ngOnInit(): void {}
 
   public registerNow() {
+    if (
+      this.selectedDep == 'Choose Role' ||
+      this.selectedRole == 'Choose Role'
+    ) {
+      this.isBad = true;
+      this.message = 'Please select valid information';
+      return;
+    }
+
+    this.isBad = false;
     this.user.department = this.selectedDep;
     this.user.roll = this.selectedRole;
 
@@ -53,6 +63,8 @@ export class EmployeeCreateComponent implements OnInit {
           this.user.address = '';
           this.user.department = '';
           this.user.salary = '';
+          this.selectedDep = 'Choose Role';
+          this.selectedRole = 'Choose Role';
         }
       },
       (err) => {

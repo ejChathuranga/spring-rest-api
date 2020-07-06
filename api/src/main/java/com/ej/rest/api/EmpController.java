@@ -64,5 +64,10 @@ public class EmpController {
         return service.findAll();
     }
 
+    @GetMapping(path = "/supervisors/{name}")
+    public Optional<List<Employee>> findAllSups(@PathVariable("name")String name) {
+        return service.findAllSupers(name);
+    }
+
 }
 

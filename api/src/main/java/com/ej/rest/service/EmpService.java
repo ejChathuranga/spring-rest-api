@@ -69,4 +69,8 @@ public class EmpService {
 
         return new Response<>(HttpStatus.BAD_REQUEST.value(), "Email is already exist", null );
     }
+
+    public Optional<List<Employee>> findAllSupers(String name) {
+        return repository.findAllSupers(name);
+    }
 }

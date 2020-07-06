@@ -75,6 +75,15 @@ export class EmployeeListComponent implements OnInit {
   }
 
   public registerNow() {
+    if (
+      this.selectedDep == 'Choose Role' ||
+      this.selectedRole == 'Choose Role'
+    ) {
+      this.isBad = true;
+      this.message = 'Please select valid information';
+      return;
+    }
+    this.isBad = false;
     this.user.department = this.selectedDep;
     this.user.roll = this.selectedRole;
     console.log(this.user);
@@ -86,6 +95,8 @@ export class EmployeeListComponent implements OnInit {
           this.isBad = true;
           this.message = data.msg;
         } else {
+          this.selectedDep = 'Choose Role';
+          this.selectedRole = 'Choose Role';
           this.modalService.dismissAll();
           this.getAll();
         }
