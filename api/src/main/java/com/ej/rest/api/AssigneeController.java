@@ -52,7 +52,7 @@ public class AssigneeController {
 
     @GetMapping(path = "/user/{id}")
     public ResponseEntity<Employee> getByUserId(@PathVariable("id") Long id) {
-        System.out.println("getByUserId:: " + id);
+//        System.out.println("getByUserId:: " + id);
         try {
             Optional<Assignee> emp = service.findByUserId(id);
             if (emp.isPresent()){

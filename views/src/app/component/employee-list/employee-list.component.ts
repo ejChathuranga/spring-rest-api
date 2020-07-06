@@ -25,6 +25,8 @@ export class EmployeeListComponent implements OnInit {
   messageSuccess: string;
   isSuccess: boolean = false;
   assignedSupervisor: any;
+  networkFail: boolean;
+  messageFailed: string;
 
   title = 'appBootstrap';
   isBad: boolean = false;
@@ -49,34 +51,40 @@ export class EmployeeListComponent implements OnInit {
   }
 
   public getAll() {
-    this.employeeList.getAll().subscribe((data) => {
-      // console.log(data);
-      let arr = <User>data;
-      let newArray = [];
+    this.employeeList.getAll().subscribe(
+      (data) => {
+        // console.log(data);
+        let arr = <User>data;
+        let newArray = [];
 
-      arr.forEach(function (element) {
-        let user: User = new User();
-        user.id = element.id;
-        user.firstName = element.firstName;
-        user.lastName = element.lastName;
-        user.emailId = element.emailId;
-        user.salary = element.salary;
-        user.address = element.address;
-        user.department = element.department;
-        user.supervisor = element.supervisor;
-        user.roll = element.roll;
+        arr.forEach(function (element) {
+          let user: User = new User();
+          user.id = element.id;
+          user.firstName = element.firstName;
+          user.lastName = element.lastName;
+          user.emailId = element.emailId;
+          user.salary = element.salary;
+          user.address = element.address;
+          user.department = element.department;
+          user.supervisor = element.supervisor;
+          user.roll = element.roll;
 
-        if (element.roll == 'Supervisor') {
-          user.isSupervisor = true;
-        } else {
-          user.isSupervisor = false;
-        }
+          if (element.roll == 'Supervisor') {
+            user.isSupervisor = true;
+          } else {
+            user.isSupervisor = false;
+          }
 
-        newArray.push(user);
-      });
+          newArray.push(user);
+        });
 
-      this.employees = newArray;
-    });
+        this.employees = newArray;
+      },
+      (err) => {
+        this.networkFail = true;
+        this.messageFailed = 'Please check server is running or not!';
+      }
+    );
   }
 
   public showUpdateEmp(content, user: User) {
