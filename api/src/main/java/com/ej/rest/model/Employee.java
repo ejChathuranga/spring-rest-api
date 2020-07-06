@@ -32,8 +32,8 @@ public class Employee {
                     @JsonProperty("emailId") @NotBlank String emailId,
                     @JsonProperty("salary") @NotBlank String salary,
                     @JsonProperty("address") @NotBlank String address,
-                    @JsonProperty("departmentId") @NotBlank String department,
-                    @JsonProperty("rollId") @NotBlank String roll) {
+                    @JsonProperty("department") @NotBlank String department,
+                    @JsonProperty("roll") @NotBlank String roll) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

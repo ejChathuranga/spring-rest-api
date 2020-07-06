@@ -26,6 +26,7 @@ public class EmpController {
 
     @PostMapping
     public Response add(@Valid @NonNull @RequestBody Employee employee) {
+//        System.out.println("new emp:" + employee.toString());
         return service.insert(employee);
     }
 

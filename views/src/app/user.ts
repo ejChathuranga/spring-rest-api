@@ -5,8 +5,8 @@ export class User {
   emailId: string;
   salary: string;
   address: string;
-  departmentId: number;
-  rollId: number;
+  department: string;
+  roll: string;
 
   constructor() {}
 }

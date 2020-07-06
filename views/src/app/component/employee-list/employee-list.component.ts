@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from './../../user';
 import { EmployeeCreateService } from './../../service/employee-create.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,11 +16,24 @@ export class EmployeeListComponent implements OnInit {
   selectedEmp: User;
   user: User = new User();
   message: string;
+  showModel: boolean = false;
+  selectedRole: string;
+  selectedDep: string;
+
+  rolls: Array<any> = ['Employee', 'Supervisor'];
+  deps: Array<any> = [
+    'Finance & Accounts',
+    'Human Resources',
+    'Production',
+    'Purchasing',
+    'Sales and marketing',
+  ];
 
   constructor(
     private employeeList: EmployeeCreateService,
     private modalService: NgbModal
   ) {}
+
   title = 'appBootstrap';
   isBad: boolean = false;
 
@@ -36,6 +50,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   public showUpdateEmp(content, user: User) {
+    this.showModel = true;
     this.user = user;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
@@ -60,6 +75,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   public registerNow() {
+    this.user.department = this.selectedDep;
+    this.user.roll = this.selectedRole;
+    console.log(this.user);
     let res = this.employeeList.updateEmp(this.user.id, this.user);
     res.subscribe(
       (data) => {
@@ -76,9 +94,27 @@ export class EmployeeListComponent implements OnInit {
         console.log(err);
 
         this.isBad = true;
-        this.message = 'Employee updating failed! Please try again later';
+        this.message = 'Please ennter valid information';
       }
     );
+  }
+
+  contact_form = new FormGroup({
+    website: new FormControl('', Validators.required),
+  });
+
+  get f() {
+    return this.contact_form.controls;
+  }
+
+  changeRole(e) {
+    console.log(e.target.value);
+    this.selectedRole = e.target.value;
+  }
+
+  changeDep(e) {
+    console.log('-->>>' + e.target.value);
+    this.selectedDep = e.target.value;
   }
 
   public deleteEmp(id: number) {

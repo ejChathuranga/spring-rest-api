@@ -12,8 +12,8 @@
           <th scope="col">First Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Salary</th>
-          <th scope="col">Address</th>
+          <th scope="col">Department</th>
+          <th scope="col">Role</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -23,8 +23,8 @@
           <td>{{ emp.firstName }}</td>
           <td>{{ emp.lastName }}</td>
           <td>{{ emp.emailId }}</td>
-          <td>{{ emp.salary }}</td>
-          <td>{{ emp.address }}</td>
+          <td>{{ emp.department }}</td>
+          <td>{{ emp.roll }}</td>
           <td>
             <button
               type="button"
@@ -48,6 +48,7 @@
   </div>
 </div>
 
+<!-- update model -->
 <ng-template #mymodal let-modal>
   <div class="modal-header">
     Update Employee
@@ -67,7 +68,7 @@
         class="alert alert-danger alert-dismissible fade show"
         role="alert"
       >
-        <strong>Something went wrong! </strong> {{ message }}
+        <strong> {{ message }} </strong>
         <button
           type="button"
           class="close"
@@ -97,6 +98,43 @@
               [(ngModel)]="user.firstName"
             />
           </div>
+
+          <!-- select role -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text"> Role </label>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                  <select class="form-control" (change)="changeRole($event)">
+                    <option>Choose Role</option>
+                    <option *ngFor="let roll of rolls">{{ roll }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- select department -->
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <label class="input-group-text"> Department </label>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div ngbDropdown class="d-inline-block">
+                  <select class="form-control" (change)="changeDep($event)">
+                    <option>Choose Department</option>
+                    <option *ngFor="let dep of deps">{{ dep }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- form-group// -->
           <div class="form-group input-group">
             <div class="input-group-prepend">
