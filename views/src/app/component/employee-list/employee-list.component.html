@@ -1,4 +1,14 @@
 <div class="card bg-light">
+  <div
+    *ngIf="isSuccess == true"
+    class="alert alert-danger alert-dismissible fade show"
+    role="alert"
+  >
+    <strong> {{ messageSuccess }} </strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
   <div class="container-sm">
     <div>
       <h3 style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
@@ -26,21 +36,40 @@
           <td>{{ emp.department }}</td>
           <td>{{ emp.roll }}</td>
           <td>
-            <button
-              type="button"
-              class="btn btn-outline-primary btn-sm"
-              (click)="showUpdateEmp(mymodal, emp)"
-            >
-              Update
-            </button>
-            &nbsp;
-            <button
-              type="button"
-              class="btn btn-outline-danger btn-sm"
-              (click)="deleteEmp(emp.id)"
-            >
-              Delete
-            </button>
+            <div class="col-sm-12 text-center">
+              <!-- <div> -->
+              <button
+                type="button"
+                class="btn btn-outline-success btn-sm"
+                (click)="showUpdateEmp(mymodal, emp)"
+              >
+                Update
+              </button>
+              <!-- </div> -->
+              &nbsp;
+              <div
+                *ngIf="!emp.isSupervisor"
+                style="display: inline-block; vertical-align: top;"
+              >
+                <button
+                  type="button"
+                  class="btn btn-outline-primary btn-sm"
+                  (click)="assignSupervisor(assigneeModel, emp)"
+                >
+                  Assignee
+                </button>
+              </div>
+              &nbsp;
+              <!-- <div> -->
+              <button
+                type="button"
+                class="btn btn-outline-danger btn-sm"
+                (click)="deleteEmp(emp.id)"
+              >
+                Delete
+              </button>
+              <!-- </div> -->
+            </div>
           </td>
         </tr>
       </tbody>
@@ -221,6 +250,64 @@
           <!-- form-group// -->
         </form>
       </article>
+    </div>
+  </div>
+</ng-template>
+
+<!-- model for add assignee -->
+<ng-template #assigneeModel let-modal>
+  <div class="modal-header">
+    <h3>
+      Assign Supervisor to &nbsp;<strong>{{ selectedEmp.firstName }}</strong>
+    </h3>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-header" *ngIf="assignedSupervisor">
+    <p>
+      <strong>{{ selectedEmp.firstName }}</strong> is currently assign
+      to&nbsp;<strong
+        >{{ assignedSupervisor.firstName }}
+        {{ assignedSupervisor.lastName }}</strong
+      >
+    </p>
+  </div>
+  <div class="modal-body">
+    <div class="container-md">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of supervisors; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ emp.firstName }}</td>
+            <td>{{ emp.lastName }}</td>
+            <td>{{ emp.department }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-outline-success btn-sm"
+                (click)="assignSupervisorToUser(emp)"
+              >
+                Assign
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </ng-template>

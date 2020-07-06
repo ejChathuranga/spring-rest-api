@@ -18,7 +18,7 @@ public class EmpJDBCRepository {
     JdbcTemplate jdbcTemplate;
 
 
-    class EmpRowMapper implements RowMapper<Employee> {
+    public class EmpRowMapper implements RowMapper<Employee> {
         @Override
         public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
             Employee employee = new Employee();
@@ -41,6 +41,13 @@ public class EmpJDBCRepository {
 
     public Optional<List<Employee>> findAllSupers(String name) {
         try {
+
+            if (name == null || name.equals("")){
+                return Optional.of(jdbcTemplate.query("select * from employee where _roll ='Supervisor' ", new Object[]{
+
+                        },
+                        new EmpRowMapper()));
+            }
 
             return Optional.of(jdbcTemplate.query("select * from employee where _roll =? AND _name=? ", new Object[]{
                             "Supervisor", name

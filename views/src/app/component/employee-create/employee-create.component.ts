@@ -34,12 +34,14 @@ export class EmployeeCreateComponent implements OnInit {
       this.selectedDep == 'Choose Role' ||
       this.selectedRole == 'Choose Role'
     ) {
+      this.isSuccess = false;
       this.isBad = true;
-      this.message = 'Please select valid information';
+      this.message = 'Please select or add valid information';
       return;
     }
 
     this.isBad = false;
+    this.isSuccess = false;
     this.user.department = this.selectedDep;
     this.user.roll = this.selectedRole;
 

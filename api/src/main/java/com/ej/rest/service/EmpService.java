@@ -1,6 +1,8 @@
 package com.ej.rest.service;
 
+import com.ej.rest.model.Assignee;
 import com.ej.rest.model.Response;
+import com.ej.rest.repo.AssigneeJDBCRepository;
 import com.ej.rest.repo.EmpJDBCRepository;
 import com.ej.rest.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class EmpService {
 
     @Autowired
     EmpJDBCRepository repository;
+
+    @Autowired
+    AssigneeJDBCRepository assigneeJDBCRepository;
 
 
     public List<Employee> findAll() {
@@ -48,14 +53,16 @@ public class EmpService {
     }
 
     public Response<?> update(Long id, Employee employee) {
+
+        // remove assignee entry when user upgrading as supervisor
+        System.out.println(employee.toString());
+        if (employee.getRoll().equals("Supervisor")) {
+            Optional<Assignee> assignee = assigneeJDBCRepository.findByUserId(employee.getId());
+            assignee.ifPresent(value -> assigneeJDBCRepository.delete(value.getId()));
+        }
+
         Optional<List<Employee>> optionalEmployee = findByEmail(employee);
 
-        System.out.println("optionalEmployee.isPresent()  : "+optionalEmployee.isPresent() );
-
-        for (Employee e: optionalEmployee.get()
-             ) {
-            System.out.println("--->>> loop" + e.toString());
-        }
         if (optionalEmployee.get().size() == 0 && repository.update(id, employee) > 0){
             return new Response<>(HttpStatus.OK.value());
         }

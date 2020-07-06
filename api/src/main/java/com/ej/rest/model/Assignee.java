@@ -4,9 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class Assignee {
     private long id;
-    @NotBlank
     private long userId;
-    @NotBlank
     private long supervisorId;
 
     public Assignee() {

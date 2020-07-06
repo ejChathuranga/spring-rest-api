@@ -1,4 +1,5 @@
 export class User {
+  [x: string]: any;
   id: number;
   firstName: string;
   lastName: string;
@@ -7,6 +8,8 @@ export class User {
   address: string;
   department: string;
   roll: string;
+  isSupervisor: boolean;
+  supervisor: string;
 
   constructor() {}
 }
